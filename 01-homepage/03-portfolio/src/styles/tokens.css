@@ -1,0 +1,75 @@
+/*
+ * 디자인 토큰
+ * PRD 14절: 밝은 배경 / 어두운 본문 / 회색 보조 텍스트 / 포인트 색상 1개
+ * 색상을 바꾸고 싶으면 이 파일만 수정하면 된다.
+ */
+
+:root {
+  /* Color ------------------------------------------------------------- */
+  /* 따뜻한 크림 바탕. 배경 입자(ParticleField)가 이 위에 떠다닌다. */
+  --color-bg: #f4f2ee;
+  --color-bg-subtle: #eceae4;
+  --color-surface: #fbfaf7;
+
+  /* 크림 배경에 맞춰 회색 계열을 따뜻한 쪽으로 맞췄다. */
+  --color-text: #17171a;
+  --color-text-secondary: #56564f;
+  --color-text-tertiary: #6f6e66;
+
+  --color-border: #dedcd5;
+  --color-border-strong: #c8c5bd;
+
+  /* 섹션 구분용 옅은 음영. 반투명이라 배경 입자가 비쳐 보인다. */
+  --color-tint: rgb(23 23 20 / 3.5%);
+
+  /* 포인트 색상은 하나만 사용한다. */
+  --color-accent: #2c4bd9;
+  --color-accent-hover: #2139ac;
+  --color-accent-soft: #eef1fe;
+
+  --color-overlay: rgb(20 22 26 / 48%);
+
+  /* Typography -------------------------------------------------------- */
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
+    'Segoe UI', 'Noto Sans KR', 'Malgun Gothic', system-ui, sans-serif;
+  --font-mono: 'SFMono-Regular', ui-monospace, 'SF Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.0625rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: clamp(1.75rem, 1.35rem + 1.7vw, 2.375rem);
+  --text-hero: clamp(2.125rem, 1.15rem + 4.3vw, 4rem);
+
+  /* Space ------------------------------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: clamp(4rem, 2.5rem + 6vw, 7.5rem);
+
+  /* Layout ------------------------------------------------------------ */
+  --container-width: 1120px;
+  --container-padding: clamp(1.25rem, 0.75rem + 2.4vw, 2.5rem);
+  --header-height: 64px;
+
+  /* Etc --------------------------------------------------------------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgb(20 22 26 / 5%);
+  --shadow-md: 0 6px 24px -12px rgb(20 22 26 / 18%);
+  --shadow-lg: 0 24px 60px -24px rgb(20 22 26 / 28%);
+
+  --transition-fast: 140ms ease;
+  --transition-base: 220ms ease;
+}

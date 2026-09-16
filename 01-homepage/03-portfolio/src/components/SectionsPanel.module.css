@@ -1,0 +1,39 @@
+/*
+ * 첫 화면 위로 올라오는 두 번째 화면.
+ * 아래에서 한 번에 올라와 화면을 채우고, 그 안에서 평범하게 스크롤된다.
+ */
+
+.panel {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+
+  /* 문서가 아니라 이 패널이 스크롤된다. */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  background-color: var(--color-bg);
+
+  /* 상단 바에 제목이 가리지 않도록 앵커 위치를 내린다. */
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
+
+  transform: translateY(100%);
+  /*
+   * 합성(compositor)에서만 처리되도록 transform 하나만 바꾼다.
+   * 꼬리가 길게 늘어지는 곡선은 마지막에 끊겨 보이기 쉬워 짧게 끊는다.
+   */
+  transition: transform 440ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+  /* 패널 안쪽을 바깥과 분리해 다시 그릴 범위를 줄인다. */
+  contain: paint;
+}
+
+/* 올리기 직전 한 프레임. 아직 화면 아래에 있지만 섹션을 미리 그려 둔다. */
+.prepared {
+  --section-render: visible;
+}
+
+.open {
+  transform: translateY(0);
+}

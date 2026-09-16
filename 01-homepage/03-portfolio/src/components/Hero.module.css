@@ -1,0 +1,81 @@
+.hero {
+  position: fixed;
+  inset: 0;
+  /* 배경 입자(0) 위, 섹션 패널(2) 아래. */
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+.inner {
+  max-width: 54rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+  padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: -0.01em;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent);
+}
+
+.heading {
+  font-size: var(--text-hero);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.16;
+}
+
+/* 줄 단위로 끊어 Hero 제목이 의도한 위치에서 줄바꿈되도록 한다. */
+.line {
+  display: block;
+}
+
+.line:not(:last-child) {
+  color: var(--color-text-secondary);
+}
+
+.subtext {
+  max-width: 40rem;
+  margin-top: var(--space-5);
+  color: var(--color-text-secondary);
+  font-size: var(--text-lg);
+  line-height: 1.7;
+}
+
+/* 스크롤 유도 */
+.hint {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  transform: translateX(-50%);
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hintLine {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--color-border-strong));
+}
