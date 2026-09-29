@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { DIFFICULTY_LABEL } from '../game/levels'
 import type { StageRecord } from '../game/storage'
 import type { Level } from '../game/types'
+import { useApples } from '../hooks/useApples'
 import { useGame } from '../hooks/useGame'
 import { useKeyboard } from '../hooks/useKeyboard'
 import { useSwipe } from '../hooks/useSwipe'
@@ -38,6 +39,11 @@ export function GameScreen({
   const { state, boxesOnGoal, canUndo, stuck, move, undo, reset } = useGame(level)
   const boardAreaRef = useRef<HTMLDivElement>(null)
   const tileSize = useTileSize(boardAreaRef, state.staticMap.rows, state.staticMap.cols)
+  const { apples, eaten } = useApples({
+    staticMap: state.staticMap,
+    board: state.board,
+    active: !state.cleared,
+  })
 
   // 진입 시점의 최고 기록. 클리어로 기록이 갱신돼도 비교 기준은 유지한다.
   const bestRef = useRef(previousBest)
@@ -120,12 +126,17 @@ export function GameScreen({
             {boxesOnGoal}/{totalBoxes}
           </span>
         </div>
+        <div className="stat">
+          <span className="stat__label">사과</span>
+          <span className="stat__value">{eaten}</span>
+        </div>
       </div>
 
       <div className="board-area" ref={boardAreaRef}>
         <Board
           staticMap={state.staticMap}
           board={state.board}
+          apples={apples}
           tileSize={tileSize}
           blocked={state.blocked}
         />

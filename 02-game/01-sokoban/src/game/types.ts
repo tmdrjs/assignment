@@ -39,6 +39,16 @@ export interface Box {
   col: number
 }
 
+/** 일정 시간마다 빈 칸에 생기는 아이템. 플레이어가 밟으면 먹는다. */
+export interface Apple {
+  /** 저장소에서도 그대로 쓰는 고유 id (uuid) */
+  id: string
+  row: number
+  col: number
+  /** 생성 시각 (ms) */
+  spawnedAt: number
+}
+
 /** 플레이 중 변하는 정보. */
 export interface BoardState {
   player: Position

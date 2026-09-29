@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>나의 목표 소개</title>
+    <meta
+      name="description"
+      content="클로드코드 과정에서 이루고 싶은 목표, 만들고 싶은 프로젝트, 배우고 싶은 것."
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <style>
+      :root {
+        --black: #111;
+        --grey: #8a8a8a;
+        --line: #e5e5e5;
+
+        --ko:
+          "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+          system-ui, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR",
+          sans-serif;
+        --en: "Helvetica Neue", Helvetica, Arial, var(--ko);
+
+        --pad: 64px;
+        /* 히어로·본문이 모두 맞춰 서는 왼쪽 1/3 기준선 */
+        --base: 33.333vw;
+        --section-y: 180px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      /* 위아래로 튕겨 스크롤될 때 드러나는 바탕도 검정 띠·검정 푸터와 이어지게 */
+      html {
+        background: var(--black);
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: #fff;
+        color: var(--black);
+        font-family: var(--ko);
+        font-size: 17px;
+        line-height: 1.7;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      ul,
+      ol,
+      figure {
+        margin: 0;
+      }
+      h1,
+      h2,
+      h3 {
+        text-wrap: balance;
+      }
+
+      .col {
+        padding-left: var(--base);
+        padding-right: var(--pad);
+      }
+
+      /* ---------- 첫 화면: 검정 띠 + 헤더 + 히어로가 화면 한 장을 채운다 ---------- */
+      .first {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        min-height: 100svh;
+      }
+
+      .topbar {
+        height: 28px;
+        background: var(--black);
+      }
+
+      .head-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 28px var(--pad) 0;
+        font-family: var(--en);
+        font-weight: 500;
+      }
+
+      .brand {
+        display: block;
+        padding: 4px;
+        margin: -4px;
+        color: inherit;
+      }
+      .mark {
+        display: grid;
+        grid-template-columns: repeat(2, 6px);
+        gap: 4px;
+      }
+      .mark i {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      .menu {
+        padding: 0;
+        list-style: none;
+        font-size: 16px;
+        line-height: 1.4;
+      }
+      .menu a {
+        color: inherit;
+        text-decoration: none;
+        text-underline-offset: 3px;
+      }
+      .menu a:hover {
+        text-decoration: underline;
+      }
+
+      .brand:focus-visible,
+      .menu a:focus-visible,
+      .tab:focus-visible {
+        outline: 2px solid var(--black);
+        outline-offset: 3px;
+      }
+
+      /* ---------- 왼쪽 여백의 세로 텍스트 ---------- */
+      /* difference 블렌딩: 흰 바탕에선 검정, 마지막 검정 섹션 위에선 흰색으로 보인다 */
+      .vt {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 5;
+        width: 48px;
+        color: #fff;
+        font-family: var(--en);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        mix-blend-mode: difference;
+        pointer-events: none;
+      }
+      .vt-nav,
+      .vt-copy {
+        position: absolute;
+        left: 20px;
+        writing-mode: vertical-rl;
+      }
+      .vt-nav {
+        top: 144px;
+        left: 15px;
+        display: flex;
+        gap: 6px;
+      }
+      .vt-nav a {
+        padding: 5px;
+        color: #757575;
+        text-decoration: none;
+        pointer-events: auto;
+        transition: color 0.2s;
+      }
+      .vt-nav a:hover,
+      .vt-nav a.on {
+        color: #fff;
+      }
+      .vt-nav a:focus-visible {
+        outline: 1px solid #fff;
+        outline-offset: 0;
+      }
+      .vt-copy {
+        bottom: 32px;
+        color: #757575;
+      }
+
+      /* ---------- 히어로 ---------- */
+      .hero {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding-top: 120px;
+        padding-bottom: 48px;
+      }
+      .hero h1 {
+        margin-bottom: 72px;
+        font-size: clamp(32px, 5vw, 108px);
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.035em;
+      }
+      /* '나의' '페이지'는 '목표 소개'보다 살짝 작게 */
+      .hero h1 .sm {
+        font-size: 0.92em;
+      }
+      /* 가로선과 부제는 첫 화면의 아래쪽 끝에 붙는다 */
+      .hero-sub {
+        margin-top: auto;
+        padding-top: 16px;
+        border-top: 1px solid var(--black);
+        font-size: 15px;
+      }
+
+      /* ---------- 공통 섹션 ---------- */
+      .section {
+        padding-top: var(--section-y);
+      }
+
+      .label {
+        padding-top: 16px;
+        border-top: 1px solid var(--black);
+        font-family: var(--en);
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+
+      .h2 {
+        margin-top: 48px;
+        font-size: clamp(28px, 3.4vw, 48px);
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+      }
+      .intro {
+        max-width: 32em;
+        margin-top: 24px;
+        font-size: 18px;
+      }
+
+      /* ---------- 01 Goal ---------- */
+      /* 내용이 짧은 만큼, 다음 구역까지 섹션 간격을 한 번 더 둔다 */
+      #goal {
+        padding-bottom: var(--section-y);
+      }
+
+      /* ---------- 02 Project · 03 Learn: 탭 전환 ---------- */
+      .tabs {
+        display: flex;
+        gap: 6px;
+        margin-top: 40px;
+      }
+      .tab {
+        padding: 10px 22px;
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
+        color: var(--grey);
+        font: inherit;
+        font-size: 17px;
+        font-weight: 600;
+        line-height: 1.4;
+        cursor: pointer;
+        transition:
+          background-color 0.2s,
+          color 0.2s;
+      }
+      .tab:hover {
+        color: var(--black);
+      }
+      .tab[aria-selected="true"] {
+        background: var(--black);
+        color: #fff;
+      }
+
+      /* 두 패널을 같은 칸에 겹쳐 두어, 바뀔 때 높이가 튀지 않는다 */
+      .panels {
+        display: grid;
+        margin-top: 48px;
+      }
+      .panel {
+        grid-area: 1 / 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+        align-items: start;
+        gap: 48px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(8px);
+        transition:
+          opacity 0.16s ease-in,
+          transform 0.16s ease-in,
+          visibility 0s linear 0.16s;
+      }
+      .panel.on {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition:
+          opacity 0.26s ease-out 0.06s,
+          transform 0.26s ease-out 0.06s,
+          visibility 0s;
+      }
+
+      .tag {
+        display: inline-block;
+        margin-bottom: 16px;
+        padding: 3px 8px;
+        border: 1px solid var(--line);
+        color: var(--grey);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+      .panel h3 {
+        font-size: clamp(22px, 2.2vw, 32px);
+        font-weight: 800;
+        line-height: 1.3;
+        letter-spacing: -0.02em;
+      }
+      .bullets {
+        margin-top: 24px;
+        padding: 0;
+        list-style: none;
+      }
+      .bullets li {
+        position: relative;
+        padding-left: 18px;
+      }
+      .bullets li + li {
+        margin-top: 10px;
+      }
+      .bullets li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--grey);
+      }
+
+      /* 이미지 자리: 흑백 사각형, 이미지가 없으면 옅은 회색 면 */
+      .shot {
+        aspect-ratio: 4 / 3;
+        background: var(--line);
+      }
+      .shot img,
+      .shot svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        filter: grayscale(1);
+      }
+      .shot img {
+        object-fit: cover;
+      }
+      .shot text {
+        font-family: var(--ko);
+      }
+
+      /* ---------- 푸터: 페이지 끝의 검정 여백 ---------- */
+      .footer {
+        margin-top: var(--section-y);
+        padding-top: var(--section-y);
+        padding-bottom: 40px;
+        background: var(--black);
+        color: var(--grey);
+        font-size: 13px;
+      }
+
+      /* ---------- 스크롤 등장 ---------- */
+      .js .r {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.45s ease,
+          transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .js .r.in {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ---------- 좁은 화면 ---------- */
+      @media (max-width: 960px) {
+        .panel {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        :root {
+          --pad: 20px;
+          --base: 20px;
+          --section-y: 96px;
+        }
+        body {
+          font-size: 16px;
+        }
+
+        .topbar {
+          height: 20px;
+        }
+        .head-row {
+          padding-top: 20px;
+        }
+        .menu {
+          font-size: 13px;
+          line-height: 1.35;
+        }
+
+        .vt {
+          display: none;
+        }
+
+        .hero {
+          padding-top: 64px;
+          padding-bottom: 32px;
+        }
+        .hero h1 {
+          margin-bottom: 48px;
+          font-size: 11vw;
+        }
+        .hero-sub {
+          font-size: 14px;
+        }
+
+        .h2 {
+          margin-top: 32px;
+        }
+        .intro {
+          font-size: 16px;
+        }
+
+        .tabs {
+          margin-top: 28px;
+        }
+        .tab {
+          padding: 9px 18px;
+          font-size: 15px;
+        }
+        .panels {
+          margin-top: 32px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .js .r {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        .panel,
+        .panel.on {
+          transform: none;
+          transition: none;
+        }
+        .vt-nav a {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body id="top">
+    <!-- 첫 화면: 01 구역은 스크롤해야 보인다 -->
+    <header class="first">
+      <div class="topbar" aria-hidden="true"></div>
+
+      <div class="head-row">
+        <a class="brand" href="#top" aria-label="맨 위로"
+          ><span class="mark" aria-hidden="true"
+            ><i></i><i></i><i></i><i></i></span
+        ></a>
+        <nav aria-label="섹션 이동">
+          <ul class="menu">
+            <li><a href="#goal">Goal</a></li>
+            <li><a href="#plans" data-tab="tab-project">Project</a></li>
+            <li><a href="#plans" data-tab="tab-learn">Learn</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="hero col" data-sec="intro">
+        <h1 class="r">
+          <span class="sm">나의</span><br />목표 소개<br /><span class="sm"
+            >페이지</span
+          >
+        </h1>
+        <p class="hero-sub r">클로드코드 과정을 시작하며 적어 두는 나의 목표</p>
+      </div>
+    </header>
+
+    <!-- 왼쪽 여백의 세로 텍스트: 현재 섹션 표시(누르면 이동) + 연도·저작권 -->
+    <aside class="vt">
+      <nav class="vt-nav" aria-label="현재 위치">
+        <a href="#top" data-key="intro">Intro</a>
+        <a href="#goal" data-key="goal">Goal</a>
+        <a href="#plans" data-key="project" data-tab="tab-project">Project</a>
+        <a href="#plans" data-key="learn" data-tab="tab-learn">Learn</a>
+      </nav>
+      <p class="vt-copy">© 2026 My Goals</p>
+    </aside>
+
+    <main>
+      <!-- 01 Goal -->
+      <section class="section col" id="goal" data-sec="goal">
+        <p class="label r">01 Goal</p>
+        <h2 class="h2 r">이 과정을 잘<br />배워 마무리하는 것</h2>
+        <p class="intro r">
+          거창한 결과보다 먼저, 끝까지 해보는 것. <br />
+          이번 과정에서 이루고 싶은 목표입니다.
+        </p>
+      </section>
+
+      <!-- 02 Project · 03 Learn -->
+      <section class="section col" id="plans" data-sec="plans">
+        <p class="label r">02 Project / 03 Learn</p>
+
+        <div class="r">
+          <div
+            class="tabs"
+            role="tablist"
+            aria-label="프로젝트와 배우고 싶은 것"
+          >
+            <button
+              class="tab"
+              role="tab"
+              id="tab-project"
+              data-key="project"
+              aria-controls="panel-project"
+              aria-selected="true"
+            >
+              프로젝트
+            </button>
+            <button
+              class="tab"
+              role="tab"
+              id="tab-learn"
+              data-key="learn"
+              aria-controls="panel-learn"
+              aria-selected="false"
+              tabindex="-1"
+            >
+              배우고 싶은 것
+            </button>
+          </div>
+
+          <div class="panels">
+            <div
+              class="panel on"
+              role="tabpanel"
+              id="panel-project"
+              aria-labelledby="tab-project"
+            >
+              <div>
+                <span class="tag">PRIVATE</span>
+                <h3>호스트 부분적 자동화 +<br />수익 분석 시스템</h3>
+                <ul class="bullets">
+                  <li>에어비앤비 호스트로서 필요했던 개인용 도구입니다.</li>
+                  <li>정산 대시보드 탭에서 수익을 분석합니다.</li>
+                  <li>두 기능을 한 웹앱 안에 탭 두 개로 담아요.</li>
+                </ul>
+              </div>
+              <figure class="shot">
+                <!-- 흑백 스케치: 한 웹앱 안의 탭 두 개 -->
+                <svg
+                  viewBox="0 0 320 240"
+                  role="img"
+                  aria-label="정산 대시보드와 게스트 응대 AI 도우미, 탭 두 개가 있는 웹앱 스케치"
+                >
+                  <rect
+                    x="28"
+                    y="30"
+                    width="264"
+                    height="180"
+                    fill="#fff"
+                    stroke="#111"
+                  />
+                  <line x1="28" y1="56" x2="292" y2="56" stroke="#111" />
+                  <text
+                    x="40"
+                    y="47"
+                    font-size="10"
+                    font-weight="700"
+                    fill="#111"
+                  >
+                    정산 대시보드
+                  </text>
+                  <rect x="40" y="53" width="64" height="3" fill="#111" />
+                  <text x="118" y="47" font-size="10" fill="#8a8a8a">
+                    게스트 응대 AI 도우미
+                  </text>
+                  <text x="44" y="80" font-size="9" fill="#8a8a8a">
+                    수익 분석
+                  </text>
+                  <g fill="#111">
+                    <rect x="46" y="150" width="14" height="40" />
+                    <rect x="68" y="126" width="14" height="64" />
+                    <rect x="90" y="138" width="14" height="52" />
+                    <rect x="112" y="102" width="14" height="88" />
+                    <rect x="134" y="118" width="14" height="72" />
+                    <rect x="156" y="92" width="14" height="98" />
+                    <rect x="178" y="108" width="14" height="82" />
+                  </g>
+                  <line x1="42" y1="190" x2="198" y2="190" stroke="#111" />
+                  <g fill="#e5e5e5">
+                    <rect x="218" y="92" width="58" height="8" />
+                    <rect x="218" y="110" width="44" height="8" />
+                    <rect x="218" y="128" width="52" height="8" />
+                    <rect x="218" y="146" width="36" height="8" />
+                  </g>
+                </svg>
+              </figure>
+            </div>
+
+            <div
+              class="panel"
+              role="tabpanel"
+              id="panel-learn"
+              aria-labelledby="tab-learn"
+            >
+              <div>
+                <h3>수업 밖의 언어·프레임워크,<br />AI로 빠르게 익혀 써보기</h3>
+                <ul class="bullets">
+                  <li>수업에서는 다루지 않은 언어나 프레임워크에 도전해요.</li>
+                  <li>클로드코드와 AI를 활용해 빠르게 익혀요.</li>
+                  <li>익힌 것을 직접 써보며 내 것으로 만들고 싶어요.</li>
+                </ul>
+              </div>
+              <figure class="shot">
+                <!-- 흑백 스케치: 낯선 언어·프레임워크를 AI로 빠르게 익혀, 에디터에서 직접 써본다 -->
+                <svg
+                  viewBox="0 0 320 240"
+                  role="img"
+                  aria-label="수업에서 다루지 않은 언어와 프레임워크를 AI로 빠르게 익혀 직접 코드로 써보는 스케치"
+                >
+                  <g fill="#fff" stroke="#111">
+                    <rect x="20" y="70" width="76" height="40" />
+                    <rect x="20" y="130" width="76" height="40" />
+                  </g>
+                  <g font-size="9" fill="#111">
+                    <text x="30" y="87">새 언어</text>
+                    <text x="30" y="147">새 프레임워크</text>
+                  </g>
+                  <g fill="#e5e5e5">
+                    <rect x="30" y="95" width="56" height="4" />
+                    <rect x="30" y="155" width="56" height="4" />
+                  </g>
+                  <text x="20" y="186" font-size="9" fill="#8a8a8a">
+                    수업 밖
+                  </text>
+
+                  <path
+                    d="M96 90 H116 M96 150 H116 M116 90 V150 M116 120 H136"
+                    fill="none"
+                    stroke="#111"
+                  />
+
+                  <rect x="136" y="98" width="44" height="44" fill="#111" />
+                  <text
+                    x="158"
+                    y="124"
+                    font-size="12"
+                    font-weight="700"
+                    fill="#fff"
+                    text-anchor="middle"
+                  >
+                    AI
+                  </text>
+                  <text x="130" y="158" font-size="9" fill="#8a8a8a">
+                    빠르게 익히기
+                  </text>
+
+                  <path d="M180 120 H200" fill="none" stroke="#111" />
+
+                  <rect
+                    x="200"
+                    y="62"
+                    width="100"
+                    height="116"
+                    fill="#fff"
+                    stroke="#111"
+                  />
+                  <line x1="200" y1="80" x2="300" y2="80" stroke="#111" />
+                  <g fill="#111">
+                    <circle cx="209" cy="71" r="2.5" />
+                    <circle cx="217" cy="71" r="2.5" />
+                    <circle cx="225" cy="71" r="2.5" />
+                  </g>
+                  <g fill="#111">
+                    <rect x="210" y="92" width="40" height="4" />
+                    <rect x="210" y="134" width="30" height="4" />
+                  </g>
+                  <g fill="#e5e5e5">
+                    <rect x="218" y="106" width="60" height="4" />
+                    <rect x="218" y="120" width="48" height="4" />
+                    <rect x="218" y="148" width="56" height="4" />
+                  </g>
+                  <path
+                    d="M270 162 L277 169 L289 155"
+                    fill="none"
+                    stroke="#111"
+                    stroke-width="1.5"
+                  />
+                  <text x="200" y="194" font-size="9" fill="#8a8a8a">
+                    직접 써보기
+                  </text>
+                </svg>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer col">
+      <p>나의 목표 소개 · 클로드코드 과정 · 2026</p>
+    </footer>
+
+    <script>
+      (() => {
+        // 스크롤 등장: 한꺼번에 들어온 요소는 위에서부터 차례로
+        const reveal = new IntersectionObserver(
+          (entries) => {
+            entries
+              .filter((entry) => entry.isIntersecting)
+              .sort(
+                (a, b) => a.boundingClientRect.top - b.boundingClientRect.top,
+              )
+              .forEach((entry, i) => {
+                const el = entry.target;
+                el.style.transitionDelay = i * 80 + "ms";
+                el.classList.add("in");
+                el.addEventListener(
+                  "transitionend",
+                  () => {
+                    el.style.transitionDelay = "";
+                  },
+                  { once: true },
+                );
+                reveal.unobserve(el);
+              });
+          },
+          { threshold: 0.15 },
+        );
+        document.querySelectorAll(".r").forEach((el) => reveal.observe(el));
+
+        // 왼쪽 세로 텍스트의 현재 섹션 표시 (탭 영역에서는 열려 있는 탭을 따른다)
+        const marks = [...document.querySelectorAll(".vt-nav a")];
+        let currentSection = "intro";
+        let currentTab = "project";
+        function mark() {
+          const key = currentSection === "plans" ? currentTab : currentSection;
+          marks.forEach((m) => {
+            const on = m.dataset.key === key;
+            m.classList.toggle("on", on);
+            if (on) m.setAttribute("aria-current", "true");
+            else m.removeAttribute("aria-current");
+          });
+        }
+        const sections = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              currentSection = entry.target.dataset.sec;
+              mark();
+            });
+          },
+          { rootMargin: "-50% 0px -50% 0px" },
+        );
+        document
+          .querySelectorAll("[data-sec]")
+          .forEach((s) => sections.observe(s));
+        mark();
+
+        // 탭 전환
+        const tabs = [...document.querySelectorAll('[role="tab"]')];
+        function select(tab, focus) {
+          tabs.forEach((t) => {
+            const on = t === tab;
+            t.setAttribute("aria-selected", String(on));
+            t.tabIndex = on ? 0 : -1;
+            document
+              .getElementById(t.getAttribute("aria-controls"))
+              .classList.toggle("on", on);
+          });
+          currentTab = tab.dataset.key;
+          mark();
+          if (focus) tab.focus();
+        }
+        tabs.forEach((tab, i) => {
+          tab.addEventListener("click", () => select(tab));
+          tab.addEventListener("keydown", (e) => {
+            const last = tabs.length - 1;
+            const n = {
+              ArrowRight: i === last ? 0 : i + 1,
+              ArrowLeft: i === 0 ? last : i - 1,
+              Home: 0,
+              End: last,
+            }[e.key];
+            if (n === undefined) return;
+            e.preventDefault();
+            select(tabs[n], true);
+          });
+        });
+        // 메뉴·세로 표시의 Project / Learn은 해당 탭을 열어 둔다
+        document.querySelectorAll("[data-tab]").forEach((link) => {
+          link.addEventListener("click", () =>
+            select(document.getElementById(link.dataset.tab)),
+          );
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import type { CSSProperties } from 'react'
 import { DIRECTION_DELTA } from '../game/constants'
-import type { BoardState, Direction, StaticMap } from '../game/types'
+import type { Apple, BoardState, Direction, StaticMap } from '../game/types'
 
 interface StaticGridProps {
   staticMap: StaticMap
@@ -42,6 +42,7 @@ const StaticGrid = memo(function StaticGrid({ staticMap, tileSize }: StaticGridP
 interface BoardProps {
   staticMap: StaticMap
   board: BoardState
+  apples: Apple[]
   tileSize: number
   blocked: { direction: Direction; tick: number } | null
 }
@@ -55,7 +56,7 @@ function bumpStyle(direction: Direction): CSSProperties {
   } as CSSProperties
 }
 
-export function Board({ staticMap, board, tileSize, blocked }: BoardProps) {
+export function Board({ staticMap, board, apples, tileSize, blocked }: BoardProps) {
   const { rows, cols, goals } = staticMap
 
   const actorStyle = (row: number, col: number): CSSProperties => ({
@@ -74,6 +75,13 @@ export function Board({ staticMap, board, tileSize, blocked }: BoardProps) {
       aria-hidden="true"
     >
       <StaticGrid staticMap={staticMap} tileSize={tileSize} />
+
+      {/* 상자보다 먼저 그려서, 상자가 사과 위로 밀려 오면 사과를 가린다. */}
+      {apples.map((apple) => (
+        <div key={apple.id} className="actor apple" style={actorStyle(apple.row, apple.col)}>
+          <span className="apple__body" />
+        </div>
+      ))}
 
       {board.boxes.map((box) => {
         const onGoal = goals[box.row][box.col]

@@ -16,6 +16,8 @@
   --box: #c08b4e;
   --box-done: #3fb27f;
   --player: #eef1f7;
+  --apple: #e5534b;
+  --apple-leaf: #3fb27f;
 
   --radius: 12px;
   --radius-sm: 8px;
@@ -401,7 +403,7 @@ kbd {
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 8px;
 }
 
@@ -532,6 +534,38 @@ kbd {
   background: var(--box-done);
 }
 
+.apple__body {
+  position: relative;
+  width: calc(var(--tile) * 0.46);
+  height: calc(var(--tile) * 0.44);
+  border-radius: 50% 50% 46% 46%;
+  background: var(--apple);
+  box-shadow: inset calc(var(--tile) * -0.04) calc(var(--tile) * -0.04) 0 rgba(0, 0, 0, 0.18),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: apple-in 240ms ease-out;
+}
+
+/* 잎 */
+.apple__body::after {
+  content: '';
+  position: absolute;
+  top: -24%;
+  left: 48%;
+  width: 40%;
+  height: 26%;
+  border-radius: 0 100% 0 100%;
+  background: var(--apple-leaf);
+}
+
+@keyframes apple-in {
+  from {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.15);
+  }
+}
+
 .player {
   z-index: 2;
 }
@@ -618,6 +652,17 @@ kbd {
 @media (pointer: coarse), (max-width: 560px) {
   .dpad {
     display: grid;
+  }
+}
+
+/* 통계 5칸이 좁은 화면에서도 한 줄에 들어가도록 */
+@media (max-width: 360px) {
+  .stats {
+    gap: 6px;
+  }
+
+  .stat__value {
+    font-size: 0.95rem;
   }
 }
 
